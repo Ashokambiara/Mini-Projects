@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Admission & Registration Department</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>College Admission & Registration Department</h1>
+        <p>Complete workflow for department staff and students</p>
+      </div>
+      <button id="seedDataBtn" class="secondary">Load Demo Data</button>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <button class="tab active" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="student">Student Portal</button>
+        <button class="tab" data-tab="applications">Applications</button>
+        <button class="tab" data-tab="courses">Courses</button>
+        <button class="tab" data-tab="registration">Registration</button>
+        <button class="tab" data-tab="fees">Fees</button>
+        <button class="tab" data-tab="reports">Reports</button>
+      </aside>
+
+      <section class="content">
+        <section id="overview" class="panel active">
+          <h2>Department Dashboard</h2>
+          <div class="stats" id="stats"></div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Upcoming Deadlines</h3>
+              <ul>
+                <li>Admission Form Deadline: <strong>31 July</strong></li>
+                <li>Document Verification: <strong>10 August</strong></li>
+                <li>Course Registration Close: <strong>25 August</strong></li>
+                <li>Fee Payment Final Date: <strong>05 September</strong></li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Quick Notes</h3>
+              <p>
+                This project covers student onboarding, application review,
+                course allocation, registration management, and fee tracking.
+              </p>
+              <p>
+                Data is stored in browser <code>localStorage</code>, so it works
+                offline and can be used as a complete front-end college project.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="student" class="panel">
+          <h2>Student Management</h2>
+          <form id="studentForm" class="card form-grid">
+            <input type="hidden" id="studentId" />
+            <label>Full Name <input id="name" required /></label>
+            <label>Email <input id="email" type="email" required /></label>
+            <label>Phone <input id="phone" required /></label>
+            <label>Date of Birth <input id="dob" type="date" required /></label>
+            <label>Program <input id="program" placeholder="B.Tech CSE" required /></label>
+            <label>Address <input id="address" required /></label>
+            <div class="actions">
+              <button type="submit">Save Student</button>
+              <button type="button" id="resetStudent" class="secondary">Reset</button>
+            </div>
+          </form>
+          <div class="card">
+            <h3>Students</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Program</th>
+                  <th>Phone</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="applications" class="panel">
+          <h2>Admission Applications</h2>
+          <form id="applicationForm" class="card form-grid">
+            <label>Student <select id="appStudent" required></select></label>
+            <label>Applied Program <input id="appProgram" required /></label>
+            <label>Entrance Score <input id="appScore" type="number" min="0" max="100" required /></label>
+            <label>Status
+              <select id="appStatus">
+                <option>Pending</option>
+                <option>Approved</option>
+                <option>Rejected</option>
+                <option>Waitlisted</option>
+              </select>
+            </label>
+            <label>Remarks <input id="appRemarks" placeholder="Optional comments" /></label>
+            <div class="actions"><button type="submit">Submit Application</button></div>
+          </form>
+          <div class="card">
+            <h3>Application Records</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Program</th>
+                  <th>Score</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody id="applicationRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="courses" class="panel">
+          <h2>Course Catalog</h2>
+          <form id="courseForm" class="card form-grid">
+            <label>Course Code <input id="courseCode" required /></label>
+            <label>Course Title <input id="courseTitle" required /></label>
+            <label>Department <input id="courseDept" required /></label>
+            <label>Credits <input id="courseCredits" type="number" min="1" max="6" required /></label>
+            <label>Seat Capacity <input id="courseSeats" type="number" min="1" required /></label>
+            <div class="actions"><button type="submit">Add Course</button></div>
+          </form>
+          <div class="card">
+            <h3>Available Courses</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Title</th>
+                  <th>Department</th>
+                  <th>Credits</th>
+                  <th>Capacity</th>
+                  <th>Enrolled</th>
+                </tr>
+              </thead>
+              <tbody id="courseRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="registration" class="panel">
+          <h2>Course Registration</h2>
+          <form id="registrationForm" class="card form-grid">
+            <label>Student <select id="regStudent" required></select></label>
+            <label>Course <select id="regCourse" required></select></label>
+            <label>Semester <input id="regSemester" placeholder="Sem 1 / Fall 2026" required /></label>
+            <div class="actions"><button type="submit">Register Course</button></div>
+          </form>
+          <div class="card">
+            <h3>Registrations</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Semester</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="registrationRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="fees" class="panel">
+          <h2>Fee Collection</h2>
+          <form id="feeForm" class="card form-grid">
+            <label>Student <select id="feeStudent" required></select></label>
+            <label>Amount (USD) <input id="feeAmount" type="number" min="1" required /></label>
+            <label>Mode
+              <select id="feeMode">
+                <option>Card</option>
+                <option>Bank Transfer</option>
+                <option>Cash</option>
+                <option>UPI</option>
+              </select>
+            </label>
+            <label>Status
+              <select id="feeStatus">
+                <option>Paid</option>
+                <option>Pending</option>
+                <option>Partial</option>
+              </select>
+            </label>
+            <div class="actions"><button type="submit">Record Fee</button></div>
+          </form>
+          <div class="card">
+            <h3>Payments</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Amount</th>
+                  <th>Mode</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="feeRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="reports" class="panel">
+          <h2>Reports & Export</h2>
+          <div class="grid two">
+            <article class="card">
+              <h3>Department Summary</h3>
+              <ul id="reportSummary"></ul>
+            </article>
+            <article class="card">
+              <h3>Export Data</h3>
+              <p>Download all records for submission or evaluation.</p>
+              <button id="exportBtn">Export JSON</button>
+              <pre id="exportPreview"></pre>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
